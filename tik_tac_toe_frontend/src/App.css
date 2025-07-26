@@ -49,18 +49,22 @@
 }
 
 .ttt-logo {
-  max-width: 115px;
-  width: 32vw;
+  max-width: 130px;
+  width: 35vw;
   height: auto;
   display: block;
-  filter: drop-shadow(0 2px 8px #282828cc) brightness(1.12) saturate(1.1);
+  filter: drop-shadow(0 2px 12px #111820dd) brightness(1.27) saturate(1.32) invert(0);
   user-select: none;
+  background: transparent;
+  border-radius: 18px;
+  margin-bottom: 3px;
+  transition: max-width 0.2s, width 0.2s;
 }
 
 @media (max-width: 670px) {
   .ttt-logo {
-    max-width: 75px;
-    width: 45vw;
+    max-width: 80px;
+    width: 55vw;
   }
   .ttt-logo-container {
     margin-bottom: 7px;
@@ -70,8 +74,8 @@
 
 @media (max-width: 400px) {
   .ttt-logo {
-    max-width: 50px;
-    width: 34vw;
+    max-width: 42px;
+    width: 37vw;
   }
 }
 

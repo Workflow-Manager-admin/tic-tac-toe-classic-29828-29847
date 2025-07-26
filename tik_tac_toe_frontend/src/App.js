@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import logoWhite from './assets/20250726_082957_logo-white.png';
+import logoWhite from './assets/20250726_083247_logo-white.png';
 
 // --- COLOR CONSTANTS (matches requirement) ---
 const PRIMARY = 'var(--primary)';
@@ -299,12 +299,15 @@ function App() {
             alt="Tik Tac Toe Logo"
             className="ttt-logo"
             style={{
-              maxWidth: 115,
-              width: '32vw',
+              maxWidth: 130, // Slightly larger default
+              width: '35vw',
               height: 'auto',
               display: 'block',
-              filter: 'drop-shadow(0 2px 8px #282828cc) brightness(1.12) saturate(1.1)',
-              userSelect: 'none'
+              filter: 'drop-shadow(0 2px 12px #111820dd) brightness(1.27) saturate(1.32) invert(0)', // Enhance for dark mode appearance
+              userSelect: 'none',
+              background: 'transparent',
+              borderRadius: 18,
+              marginBottom: 3,
             }}
             draggable={false}
           />
