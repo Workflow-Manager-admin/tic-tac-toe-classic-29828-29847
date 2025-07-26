@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './App.css';
 
 // --- COLOR CONSTANTS (matches requirement) ---
-const PRIMARY = '#1976d2';
-const ACCENT = '#ff5252';
-const SECONDARY = '#ffffff';
+const PRIMARY = 'var(--primary)';
+const ACCENT = 'var(--accent)';
+const SECONDARY = 'var(--surface)';
+const TXT_COLOR = 'var(--text-color)';
+const TXT_SECONDARY = 'var(--text-secondary)';
 
 // Square component with light animation
 // PUBLIC_INTERFACE
@@ -321,8 +323,11 @@ function App() {
         />
         <div className="ttt-footer">
           <span>
-            <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer"
-              style={{ color: PRIMARY, textDecoration: 'underline' }}>
+            <a 
+              href="https://reactjs.org/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
               Built with React
             </a>
           </span>

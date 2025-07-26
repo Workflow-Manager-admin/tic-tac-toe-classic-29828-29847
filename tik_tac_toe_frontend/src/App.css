@@ -1,18 +1,21 @@
-/* --- Tik Tac Toe CSS Theme and Layout --- */
+ /* --- Tik Tac Toe Dark Theme and Layout --- */
 
-/* Color Variables (from requirements) */
 :root {
-  --primary: #1976d2;
-  --accent: #ff5252;
-  --secondary: #ffffff;
-  --board-border: #e0e6ef;
+  --primary: #5abfff;
+  --accent: #ff726b;
+  --secondary: #181926;
+  --surface: #23273a;
+  --surface-alt: #232841;
+  --board-border: #263143;
   --cell-size: 80px;
   --cell-size-mobile: 55px;
   --radius: 22px;
-  --board-bg: #f9f9fc;
+  --board-bg: #222331;
+  --text-color: #edeff2;
+  --text-secondary: #a3b4d5;
+  --border-color: #2d3647;
 }
 
-/* App root: Center everything, full viewport */
 .ttt-app-root {
   min-height: 100vh;
   background: var(--secondary);
@@ -21,7 +24,6 @@
   justify-content: center;
 }
 
-/* Main game container */
 .ttt-app-main {
   margin: 36px 0;
   min-width: 330px;
@@ -29,23 +31,23 @@
   max-width: 420px;
   background: var(--board-bg);
   border-radius: var(--radius);
-  box-shadow: 0 4px 24px 0 #1976d210, 0 2px 6px #1976d211;
+  box-shadow: 0 4px 24px 0 #0e121b70, 0 2px 6px #1976d210;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 38px 18px 26px 18px;
+  border: 1.5px solid var(--board-border);
 }
 
-/* Title */
 .ttt-title {
   color: var(--primary);
   font-weight: 700;
   letter-spacing: 2px;
   font-size: 2.1rem;
   margin: 0 0 14px 0;
+  text-shadow: 0 1px 6px #10152260;
 }
 
-/* Status above board */
 .ttt-status {
   font-size: 1.20rem;
   margin-bottom: 12px;
@@ -57,31 +59,29 @@
   justify-content: center;
   animation: fade-in 0.7s;
   transition: color 0.3s;
+  text-shadow: 0 1px 8px #2e2229cc;
 }
-
 .ttt-status.pulse {
   animation: pulse-status 0.35s;
 }
-
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 @keyframes pulse-status {
-  0% { transform: scale(1.00); }
-  40% { transform: scale(1.09); }
-  100% { transform: scale(1.0); }
+  0% { transform: scale(1.00);}
+  40% { transform: scale(1.09);}
+  100% { transform: scale(1.0);}
 }
 
-/* Game Board */
 .ttt-board {
   display: flex;
   flex-direction: column;
   gap: 0;
-  background: var(--secondary);
+  background: var(--surface);
   border-radius: var(--radius);
   border: 2px solid var(--board-border);
-  box-shadow: 0 2px 12px #1976d207;
+  box-shadow: 0 2px 12px #12131ce5;
   margin-bottom: 17px;
   user-select: none;
   transition: box-shadow 0.2s;
@@ -94,8 +94,8 @@
 .ttt-square {
   width: var(--cell-size);
   height: var(--cell-size);
-  background: var(--secondary);
-  border: 1.5px solid var(--board-border);
+  background: var(--surface-alt);
+  border: 1.5px solid var(--border-color);
   outline: none;
   font-size: 2.45rem;
   font-weight: bold;
@@ -112,29 +112,29 @@
   z-index: 1;
   background-clip: padding-box;
   animation: pop-in 0.18s;
+  text-shadow: 0 1px 9px #02040993;
 }
-
 .ttt-square:disabled,
 .ttt-square[disabled] {
-  opacity: 0.57;
+  opacity: 0.41;
   cursor: not-allowed;
-  background: #f4f6fa;
+  background: #23273a90;
+  color: #7393bb;
+  text-shadow: none;
 }
-
 .ttt-square.win {
-  background: #e3eaf7;
-  box-shadow: 0 0 8px 2px #1976d222;
+  background: #293e51;
+  box-shadow: 0 0 12px 2px #3fcbe540, 0 2px 10px #5abfff66;
   border: 2px solid var(--accent);
+  color: var(--accent);
 }
 
-/* Animations for square placement */
 @keyframes pop-in {
   0%   { transform: scale(0.65);}
   90%  { transform: scale(1.11);}
   100% { transform: scale(1);}
 }
 
-/* Controls under the board */
 .ttt-controls {
   display: flex;
   flex-direction: column;
@@ -152,20 +152,22 @@
 .ttt-modes button {
   font-size: 1.05rem;
   font-weight: 600;
-  background: #e3eaf7;
+  background: #1d2533;
   color: var(--primary);
-  border: none;
+  border: 1px solid #314059;
   border-radius: 12px;
   padding: 8px 18px;
   margin: 0 3px;
   cursor: pointer;
-  transition: background 0.24s, color 0.24s;
+  transition: background 0.24s, color 0.24s, border 0.21s;
   outline: none;
+  box-shadow: 0 1.5px 2.5px #10152250;
 }
-
 .ttt-modes button.active-mode {
   background: var(--primary);
-  color: var(--secondary);
+  color: var(--surface);
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 12px #5abfff35;
 }
 
 .ttt-symbol-pick {
@@ -173,62 +175,76 @@
   align-items: center;
   gap: 5px;
   margin-top: 0.6em;
+  color: var(--text-color);
 }
-
 .ttt-symbol-pick button {
   font-size: 1.00rem;
   font-weight: bold;
   padding: 7px 15px;
   border-radius: 10px;
-  border: none;
+  border: 1px solid #352932;
   margin-right: 4px;
   cursor: pointer;
-  background: #ffeaea;
+  background: #2d2539;
   color: var(--accent);
-  box-shadow: 0 0.5px 2px #ff525209;
+  box-shadow: 0 0.5px 2px #ff52520a;
   outline: none;
   transition: all 0.22s;
 }
-
 .ttt-symbol-pick button:disabled,
 .ttt-modes button:disabled {
-  opacity: 0.45;
+  opacity: 0.37;
   cursor: not-allowed;
+}
+.ttt-symbol-pick button.active-mode,
+.ttt-symbol-pick button[style*="background: var(--accent)"] {
+  background: var(--accent);
+  color: var(--surface);
+  border: 1.5px solid var(--primary);
+  font-weight: 700 !important;
 }
 
 .ttt-reset-btn {
-  color: var(--secondary);
+  color: var(--surface);
   background: var(--accent);
   border: none;
   border-radius: 11px;
   padding: 8px 20px;
   font-size: 1.05rem;
   font-weight: 700;
-  box-shadow: 0 2px 8px #ff52522a;
+  box-shadow: 0 2px 8px #ff525226, 0 0px 7px #23030c31;
   margin-top: 9px;
-  transition: background 0.13s, transform 0.15s;
+  transition: background 0.13s, transform 0.15s, color 0.13s;
   cursor: pointer;
+  letter-spacing: 0.5px;
 }
-
 .ttt-reset-btn:hover:not(:disabled) {
-  background: #fa1a23;
-  transform: translateY(-2px) scale(1.06);
-  opacity: 0.94;
+  background: #d60022;
+  color: #fff;
+  transform: translateY(-2px) scale(1.07);
+  opacity: 1;
 }
-
 .ttt-reset-btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
-/* Footer */
 .ttt-footer {
   margin-top: 18px;
   font-size: 0.97rem;
-  color: #bdbdbd;
-  opacity: 0.92;
+  color: #51617b;
+  opacity: 0.86;
+}
+.ttt-footer a {
+  color: var(--primary);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.ttt-footer a:hover {
+  color: var(--accent);
 }
 
-/* Responsive design for mobile */
+/* Responsive for mobile */
 @media (max-width: 670px) {
   :root {
     --cell-size: var(--cell-size-mobile);
@@ -249,7 +265,6 @@
   }
 }
 
-/* Hide scroll on mobile */
 @media (max-width: 400px) {
   .ttt-app-root {
     min-height: 100vh;
@@ -260,4 +275,3 @@
     padding: 12px 3px 13px 3px;
   }
 }
-
