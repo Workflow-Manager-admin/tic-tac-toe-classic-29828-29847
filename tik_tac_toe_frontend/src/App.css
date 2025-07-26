@@ -1,104 +1,263 @@
-/* CSS Variables for Theme Management */
+/* --- Tik Tac Toe CSS Theme and Layout --- */
+
+/* Color Variables (from requirements) */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #1976d2;
+  --accent: #ff5252;
+  --secondary: #ffffff;
+  --board-border: #e0e6ef;
+  --cell-size: 80px;
+  --cell-size-mobile: 55px;
+  --radius: 22px;
+  --board-bg: #f9f9fc;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+/* App root: Center everything, full viewport */
+.ttt-app-root {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+/* Main game container */
+.ttt-app-main {
+  margin: 36px 0;
+  min-width: 330px;
+  width: 100%;
+  max-width: 420px;
+  background: var(--board-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px 0 #1976d210, 0 2px 6px #1976d211;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  padding: 38px 18px 26px 18px;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+/* Title */
+.ttt-title {
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 2.1rem;
+  margin: 0 0 14px 0;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+/* Status above board */
+.ttt-status {
+  font-size: 1.20rem;
+  margin-bottom: 12px;
+  color: var(--accent);
   font-weight: 600;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.7s;
+  transition: color 0.3s;
+}
+
+.ttt-status.pulse {
+  animation: pulse-status 0.35s;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse-status {
+  0% { transform: scale(1.00); }
+  40% { transform: scale(1.09); }
+  100% { transform: scale(1.0); }
+}
+
+/* Game Board */
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--secondary);
+  border-radius: var(--radius);
+  border: 2px solid var(--board-border);
+  box-shadow: 0 2px 12px #1976d207;
+  margin-bottom: 17px;
+  user-select: none;
+  transition: box-shadow 0.2s;
+}
+
+.ttt-board-row {
+  display: flex;
+}
+
+.ttt-square {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background: var(--secondary);
+  border: 1.5px solid var(--board-border);
+  outline: none;
+  font-size: 2.45rem;
+  font-weight: bold;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.23s, background 0.17s;
+  border-radius: 11px;
+  margin: 2.5px;
+  box-shadow: 0 1.5px 4px #1976d206;
+  position: relative;
+  z-index: 1;
+  background-clip: padding-box;
+  animation: pop-in 0.18s;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.ttt-square:disabled,
+.ttt-square[disabled] {
+  opacity: 0.57;
+  cursor: not-allowed;
+  background: #f4f6fa;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.ttt-square.win {
+  background: #e3eaf7;
+  box-shadow: 0 0 8px 2px #1976d222;
+  border: 2px solid var(--accent);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Animations for square placement */
+@keyframes pop-in {
+  0%   { transform: scale(0.65);}
+  90%  { transform: scale(1.11);}
+  100% { transform: scale(1);}
+}
+
+/* Controls under the board */
+.ttt-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+  width: 100%;
+}
+
+.ttt-modes {
+  display: flex;
+  gap: 12px;
+}
+
+.ttt-modes button {
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: #e3eaf7;
+  color: var(--primary);
+  border: none;
+  border-radius: 12px;
+  padding: 8px 18px;
+  margin: 0 3px;
+  cursor: pointer;
+  transition: background 0.24s, color 0.24s;
+  outline: none;
+}
+
+.ttt-modes button.active-mode {
+  background: var(--primary);
+  color: var(--secondary);
+}
+
+.ttt-symbol-pick {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 0.6em;
+}
+
+.ttt-symbol-pick button {
+  font-size: 1.00rem;
+  font-weight: bold;
+  padding: 7px 15px;
+  border-radius: 10px;
+  border: none;
+  margin-right: 4px;
+  cursor: pointer;
+  background: #ffeaea;
+  color: var(--accent);
+  box-shadow: 0 0.5px 2px #ff525209;
+  outline: none;
+  transition: all 0.22s;
+}
+
+.ttt-symbol-pick button:disabled,
+.ttt-modes button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ttt-reset-btn {
+  color: var(--secondary);
+  background: var(--accent);
+  border: none;
+  border-radius: 11px;
+  padding: 8px 20px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px #ff52522a;
+  margin-top: 9px;
+  transition: background 0.13s, transform 0.15s;
+  cursor: pointer;
+}
+
+.ttt-reset-btn:hover:not(:disabled) {
+  background: #fa1a23;
+  transform: translateY(-2px) scale(1.06);
+  opacity: 0.94;
+}
+
+.ttt-reset-btn:active {
+  transform: scale(0.98);
+}
+
+/* Footer */
+.ttt-footer {
+  margin-top: 18px;
+  font-size: 0.97rem;
+  color: #bdbdbd;
+  opacity: 0.92;
 }
 
 /* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+@media (max-width: 670px) {
+  :root {
+    --cell-size: var(--cell-size-mobile);
+  }
+  .ttt-app-main {
+    padding: 18px 1vw 16px 1vw;
+    max-width: 97vw;
+    min-width: 0;
+  }
+  .ttt-title {
+    font-size: 1.45rem;
+  }
+  .ttt-status {
+    font-size: 1.05rem;
+  }
+  .ttt-square {
+    font-size: 1.63rem;
   }
 }
+
+/* Hide scroll on mobile */
+@media (max-width: 400px) {
+  .ttt-app-root {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .ttt-app-main {
+    margin: 9px 0;
+    padding: 12px 3px 13px 3px;
+  }
+}
+
