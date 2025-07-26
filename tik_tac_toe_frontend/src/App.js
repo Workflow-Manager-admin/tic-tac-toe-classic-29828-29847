@@ -293,11 +293,19 @@ function App() {
   return (
     <div className="ttt-app-root">
       <div className="ttt-app-main">
-        <div className="ttt-logo-container">
+        <div className="ttt-logo-container" style={{ width: '100%', justifyContent: 'center', display: 'flex', alignItems: 'flex-end', marginTop: 4, marginBottom: 10 }}>
           <img
             src={logoWhite}
             alt="Tik Tac Toe Logo"
             className="ttt-logo"
+            style={{
+              maxWidth: 115,
+              width: '32vw',
+              height: 'auto',
+              display: 'block',
+              filter: 'drop-shadow(0 2px 8px #282828cc) brightness(1.12) saturate(1.1)',
+              userSelect: 'none'
+            }}
             draggable={false}
           />
         </div>
