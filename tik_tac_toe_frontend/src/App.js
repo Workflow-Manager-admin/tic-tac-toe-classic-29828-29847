@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import logoWhite from './assets/20250726_082957_logo-white.png';
 
 // --- COLOR CONSTANTS (matches requirement) ---
 const PRIMARY = 'var(--primary)';
@@ -292,6 +293,14 @@ function App() {
   return (
     <div className="ttt-app-root">
       <div className="ttt-app-main">
+        <div className="ttt-logo-container">
+          <img
+            src={logoWhite}
+            alt="Tik Tac Toe Logo"
+            className="ttt-logo"
+            draggable={false}
+          />
+        </div>
         <h1 className="ttt-title">Tik Tac Toe</h1>
         <div className={`ttt-status${statusAnim ? ' pulse' : ''}`}>
           {statusMsg}
